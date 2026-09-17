@@ -27,7 +27,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Professional Maroon & Grey theme
+# Professional dark theme
 # -----------------------------
 st.markdown(
     """
@@ -35,14 +35,14 @@ st.markdown(
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
     :root {
-        --bg: #1b1a1c;
-        --surface: #232224;
-        --surface-2: #2a2829;
-        --border: #3d3a3c;
-        --text: #f5f3f4;
-        --muted: #b8b3b6;
-        --accent: #7c1f2b;
-        --accent-2: #a83246;
+        --bg: #080b12;
+        --surface: #10151f;
+        --surface-2: #151b27;
+        --border: #263044;
+        --text: #f5f7fb;
+        --muted: #9aa6b8;
+        --accent: #e63946;
+        --accent-2: #ff6b6b;
         --success: #38d39f;
         --warning: #f5b942;
     }
@@ -53,14 +53,14 @@ st.markdown(
 
     .stApp {
         background:
-            radial-gradient(circle at 10% 0%, rgba(124,31,43,.18), transparent 28%),
-            radial-gradient(circle at 90% 15%, rgba(168,50,70,.10), transparent 25%),
+            radial-gradient(circle at 10% 0%, rgba(230,57,70,.12), transparent 28%),
+            radial-gradient(circle at 90% 15%, rgba(255,107,107,.07), transparent 25%),
             var(--bg);
         color: var(--text);
     }
 
     [data-testid="stSidebar"] {
-        background: #201f21;
+        background: #0c1018;
         border-right: 1px solid var(--border);
     }
 
@@ -72,7 +72,7 @@ st.markdown(
         padding: 26px 30px;
         border: 1px solid var(--border);
         border-radius: 22px;
-        background: linear-gradient(135deg, rgba(124,31,43,.22), rgba(35,34,36,.92) 52%);
+        background: linear-gradient(135deg, rgba(230,57,70,.15), rgba(16,21,31,.92) 52%);
         box-shadow: 0 18px 60px rgba(0,0,0,.25);
         margin-bottom: 22px;
     }
@@ -82,7 +82,6 @@ st.markdown(
         margin: 0 0 7px 0;
         font-weight: 800;
         letter-spacing: -1px;
-        color: var(--text);
     }
 
     .hero p {
@@ -96,9 +95,9 @@ st.markdown(
         display: inline-block;
         padding: 6px 11px;
         border-radius: 999px;
-        background: rgba(124,31,43,.22);
-        border: 1px solid rgba(168,50,70,.45);
-        color: #ff9aa8;
+        background: rgba(230,57,70,.14);
+        border: 1px solid rgba(230,57,70,.35);
+        color: #ff8a91;
         font-size: 12px;
         font-weight: 700;
         margin-bottom: 13px;
@@ -108,7 +107,6 @@ st.markdown(
         font-size: 20px;
         font-weight: 750;
         margin: 18px 0 10px 0;
-        color: var(--text);
     }
 
     .section-subtitle {
@@ -137,11 +135,10 @@ st.markdown(
         font-size: 28px;
         font-weight: 800;
         margin-top: 7px;
-        color: var(--text);
     }
 
     .candidate-card {
-        background: linear-gradient(145deg, #262425, #201e1f);
+        background: linear-gradient(145deg, #111722, #0e131c);
         border: 1px solid var(--border);
         border-radius: 16px;
         padding: 18px;
@@ -151,7 +148,6 @@ st.markdown(
     .candidate-name {
         font-size: 18px;
         font-weight: 750;
-        color: var(--text);
     }
 
     .small-muted {
@@ -164,158 +160,52 @@ st.markdown(
         padding: 4px 9px;
         margin: 3px 4px 3px 0;
         border-radius: 999px;
-        background: #332e30;
-        color: #f0e9eb;
+        background: #1b2433;
+        color: #dce3ef;
         font-size: 11px;
-        border: 1px solid #4a4345;
+        border: 1px solid #2a3548;
     }
 
     .stButton > button {
         border-radius: 10px;
         font-weight: 700;
-        border: 1px solid #4a4547;
+        border: 1px solid #303b50;
         min-height: 42px;
-        color: var(--text) !important;
-        background: var(--surface-2);
     }
 
     .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, var(--accent-2), var(--accent));
+        background: linear-gradient(135deg, #e63946, #b91f2c);
         border: none;
-        color: #ffffff !important;
+        color: white;
     }
 
     div[data-testid="stFileUploader"] {
-        background: rgba(35,34,36,.72);
-        border: 1px dashed #55494c;
+        background: rgba(16,21,31,.72);
+        border: 1px dashed #39465e;
         border-radius: 14px;
         padding: 8px;
-    }
-
-    div[data-testid="stFileUploader"] * {
-        color: var(--text) !important;
     }
 
     .info-box {
         padding: 13px 15px;
         border-radius: 12px;
-        background: #262425;
+        background: #111823;
         border: 1px solid var(--border);
-        color: #ece6e8;
+        color: #cbd4e2;
         font-size: 13px;
         line-height: 1.55;
     }
 
+    .footer {
+        text-align: center;
+        color: #657187;
+        font-size: 11px;
+        padding: 28px 0 10px;
+    }
+
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header [data-testid="stToolbar"] {visibility: hidden;}
-
-    [data-testid="collapsedControl"] {
-        visibility: visible !important;
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        background: var(--surface-2);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        color: var(--text) !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-
-    [data-testid="collapsedControl"] svg {
-        fill: var(--text) !important;
-    }
-
-    .stTextArea textarea,
-    .stTextInput input {
-        background-color: var(--surface) !important;
-        color: var(--text) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 10px !important;
-        caret-color: var(--accent-2);
-    }
-
-    .stTextArea textarea::placeholder,
-    .stTextInput input::placeholder {
-        color: var(--muted) !important;
-        opacity: 1 !important;
-    }
-
-    .stTextArea textarea:focus,
-    .stTextInput input:focus {
-        border-color: var(--accent-2) !important;
-        box-shadow: 0 0 0 2px rgba(168,50,70,.25) !important;
-    }
-
-    .stSelectbox div[data-baseweb="select"] > div {
-        background-color: var(--surface) !important;
-        color: var(--text) !important;
-        border-color: var(--border) !important;
-    }
-
-    .stSelectbox div[data-baseweb="select"] * {
-        color: var(--text) !important;
-    }
-
-    [data-testid="stSidebar"] div[role="radiogroup"] label {
-        padding: 6px 4px;
-        border-radius: 8px;
-    }
-
-    [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
-        background: rgba(255,255,255,.05);
-    }
-
-    [data-testid="stDataFrame"] {
-        border-radius: 10px;
-        overflow: hidden;
-        border: 1px solid var(--border);
-    }
-
-    div[data-testid="stProgress"] > div > div {
-        background: linear-gradient(135deg, var(--accent-2), var(--accent)) !important;
-    }
-
-    .stMarkdown p, .stMarkdown li, .stMarkdown span,
-    [data-testid="stWidgetLabel"] label,
-    [data-testid="stMetricLabel"], [data-testid="stMetricValue"] {
-        color: var(--text);
-    }
-
-    [data-testid="stRadio"] label {
-        color: var(--text) !important;
-    }
-
-    [data-testid="stRadio"] label p {
-        color: var(--text) !important;
-        font-size: 14px;
-    }
-
-    div[data-baseweb="popover"] {
-        background-color: var(--surface) !important;
-    }
-
-    ul[data-testid="stSelectboxVirtualDropdown"] {
-        background-color: var(--surface) !important;
-        border: 1px solid var(--border) !important;
-    }
-
-    ul[data-testid="stSelectboxVirtualDropdown"] li {
-        background-color: var(--surface) !important;
-        color: var(--text) !important;
-    }
-
-    ul[data-testid="stSelectboxVirtualDropdown"] li:hover {
-        background-color: var(--surface-2) !important;
-    }
-
-    div[data-testid="stAlert"] {
-        color: #1a1a1a !important;
-    }
-
-    div[data-testid="stAlert"] p, div[data-testid="stAlert"] span {
-        color: #1a1a1a !important;
-    }
+    header {visibility: hidden;}
     </style>
     """,
     unsafe_allow_html=True,
@@ -537,6 +427,7 @@ def candidate_name_from_result(result: Dict[str, Any], fallback: str) -> str:
 
 
 def analyze_candidate(job_text: str, resume_text: str, candidate_filename: str) -> Dict[str, Any]:
+    # Retrieve JD context relevant to this resume.
     jd_chunks = split_chunks(job_text)
     jd_index = build_faiss_index(jd_chunks)
     jd_context = retrieve_context(
@@ -546,6 +437,7 @@ def analyze_candidate(job_text: str, resume_text: str, candidate_filename: str) 
         top_k=6,
     )
 
+    # Retrieve resume context around core candidate information.
     resume_chunks = split_chunks(resume_text)
     resume_index = build_faiss_index(resume_chunks)
     resume_context = retrieve_context(
@@ -601,6 +493,7 @@ Generate 4 to 6 useful questions.
     data = parse_json_response(raw)
 
     if not data:
+        # Graceful plain-text fallback if the model returns malformed JSON.
         return {
             "candidate_profile": {"name": "", "email": "", "phone": "", "location": ""},
             "skills": [],
@@ -662,7 +555,7 @@ with st.sidebar:
         """
         <div style="padding:8px 2px 18px;">
             <div style="font-size:25px;font-weight:800;">💼 HireFlow AI</div>
-            <div style="color:#b8b3b6;font-size:12px;margin-top:5px;">
+            <div style="color:#9aa6b8;font-size:12px;margin-top:5px;">
                 Recruitment Intelligence
             </div>
         </div>
@@ -790,6 +683,7 @@ if page == "Screening Dashboard":
                 + ". For scanned PDFs, add an OCR-enabled version or OCR layer."
             )
 
+    # Metrics
     candidate_count = len(st.session_state.candidates)
     jd_loaded = bool(st.session_state.job_text.strip())
 
@@ -1018,35 +912,103 @@ elif page == "Candidate Analysis":
             for item in safe_list(result.get("experience")):
                 st.write(f"• {item}")
 
+            st.markdown("#### Certifications")
+            for item in safe_list(result.get("certifications")):
+                st.write(f"• {item}")
+
         with right:
-            st.markdown("#### Matched Requirements")
+            st.markdown("#### Matched requirements")
             for item in safe_list(result.get("matched_requirements")):
-                st.write(f"✓ {item}")
+                st.success(str(item))
 
-            st.markdown("#### Missing / Unverified")
+            st.markdown("#### Missing / unverified")
             for item in safe_list(result.get("missing_or_unverified_requirements")):
-                st.write(f"⚠ {item}")
+                st.warning(str(item))
 
-            st.markdown("#### Interview Questions")
-            for item in safe_list(result.get("interview_questions")):
-                st.write(f"❓ {item}")
+            st.markdown("#### Evidence notes")
+            for item in safe_list(result.get("evidence_notes")):
+                st.write(f"• {item}")
+
+        st.markdown("#### Relevant experience summary")
+        st.markdown(
+            f"<div class='info-box'>{result.get('relevant_experience_summary', 'Not found in provided material')}</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("#### Suggested interview questions")
+        questions = safe_list(result.get("interview_questions"))
+        if questions:
+            for i, q in enumerate(questions, 1):
+                st.markdown(f"**{i}.** {q}")
+        else:
+            st.info("No interview questions were generated.")
 
 
 # ============================================================
 # How It Works
 # ============================================================
-elif page == "How It Works":
-    st.markdown("<div class='section-title'>How HireFlow AI Works</div>", unsafe_allow_html=True)
+else:
+    st.markdown("<div class='section-title'>How HireFlow AI works</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='section-subtitle'>The technical workflow runs behind the interface so HR can focus on the results.</div>",
+        unsafe_allow_html=True,
+    )
+
+    steps = [
+        ("01", "Upload", "Add a job description and multiple candidate resumes."),
+        ("02", "Extract", "Python extracts text from PDF, DOCX and TXT documents."),
+        ("03", "Retrieve", "The system chunks documents, creates embeddings and retrieves relevant context."),
+        ("04", "Analyze", "Groq AI compares documented candidate information with job requirements."),
+        ("05", "Review", "HR reviews skills, education, experience, matching evidence and missing/unverified requirements."),
+        ("06", "Prepare", "The system generates job-relevant interview questions from the supplied context."),
+    ]
+
+    for num, title, description in steps:
+        st.markdown(
+            f"""
+            <div class="candidate-card">
+                <div style="display:flex;gap:16px;align-items:flex-start;">
+                    <div style="font-size:13px;font-weight:800;color:#ff7d85;">{num}</div>
+                    <div>
+                        <div class="candidate-name">{title}</div>
+                        <div class="small-muted" style="margin-top:5px;">{description}</div>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("### Technology")
+    tech_df = pd.DataFrame(
+        [
+            ["Python", "Application logic and document processing"],
+            ["Streamlit", "Web interface and HR dashboard"],
+            ["Groq", "Fast LLM-based candidate analysis"],
+            ["RAG", "Context retrieval from job descriptions and resumes"],
+            ["FAISS", "Vector similarity search"],
+            ["Sentence Transformers", "Document embeddings"],
+            ["PyMuPDF", "PDF text extraction"],
+            ["python-docx", "DOCX text extraction"],
+        ],
+        columns=["Technology", "Role"],
+    )
+    st.dataframe(tech_df, use_container_width=True, hide_index=True)
+
     st.markdown(
         """
-        <div class="info-box" style="line-height: 1.8;">
-        <b>1. Ingestion & Extraction:</b> Extracts text cleanly from PDF, DOCX, and TXT resume files.<br>
-        <b>2. Semantic Chunking & FAISS:</b> Splits documents and uses vector embeddings to index and find exact context matches.<br>
-        <b>3. Groq API Integration:</b> Performs structured evaluation using secure LLM processing.<br>
-        <b>4. HR Guardrails:</b> Ensures outputs focus exclusively on documented facts and requirements, leaving final human oversight intact.
+        <div class="info-box">
+        <b>Responsible use:</b> HireFlow AI is designed as a recruitment
+        support tool. It should not infer protected characteristics or make
+        the final hiring decision. HR professionals should verify important
+        information against the original application materials.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-st.markdown("<div class='footer'>HireFlow AI &bull; Intelligent Recruitment Assistant</div>", unsafe_allow_html=True)
+
+st.markdown(
+    "<div class='footer'>HireFlow AI · Intelligent Recruitment Assistant · AI-assisted, human-led hiring</div>",
+    unsafe_allow_html=True,
+)
