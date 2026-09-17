@@ -28,179 +28,310 @@ st.set_page_config(
 
 # -----------------------------
 # Professional dark theme
+# (UI ONLY UPGRADED — koi bhi logic/function neeche nahi chheda gaya)
 # -----------------------------
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap');
 
+    /* ---------- Design tokens (naye, zyada premium palette) ---------- */
     :root {
-        --bg: #080b12;
+        --bg: #05070d;
+        --bg-2: #070a12;
         --surface: #10151f;
         --surface-2: #151b27;
-        --border: #263044;
+        --surface-glass: rgba(21, 27, 39, 0.55);
+        --border: #232d40;
+        --border-soft: rgba(255,255,255,0.06);
         --text: #f5f7fb;
         --muted: #9aa6b8;
-        --accent: #e63946;
+        --muted-2: #6f7c92;
+
+        /* accent gradient: red -> violet, zyada "premium/attractive" feel */
+        --accent: #ef4056;
         --accent-2: #ff6b6b;
+        --accent-3: #7c5cff;
+        --accent-gradient: linear-gradient(135deg, #ff6b6b 0%, #ef4056 45%, #7c5cff 100%);
+
         --success: #38d39f;
         --warning: #f5b942;
+        --danger: #ff5d6c;
+
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --radius-sm: 10px;
+
+        --shadow-soft: 0 18px 60px rgba(0,0,0,.35);
+        --shadow-glow: 0 0 0 1px rgba(239,64,86,.15), 0 20px 45px rgba(239,64,86,.10);
     }
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
     }
 
+    /* ---------- App background: subtle animated gradient glow ---------- */
     .stApp {
         background:
-            radial-gradient(circle at 10% 0%, rgba(230,57,70,.12), transparent 28%),
-            radial-gradient(circle at 90% 15%, rgba(255,107,107,.07), transparent 25%),
-            var(--bg);
+            radial-gradient(circle at 8% -5%, rgba(239,64,86,.16), transparent 30%),
+            radial-gradient(circle at 95% 10%, rgba(124,92,255,.12), transparent 30%),
+            radial-gradient(circle at 50% 100%, rgba(56,211,159,.05), transparent 35%),
+            linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
         color: var(--text);
     }
 
+    /* ---------- Sidebar ---------- */
     [data-testid="stSidebar"] {
-        background: #0c1018;
-        border-right: 1px solid var(--border);
+        background: linear-gradient(180deg, #0b0e16 0%, #090b12 100%);
+        border-right: 1px solid var(--border-soft);
     }
 
     [data-testid="stSidebar"] * {
         color: var(--text);
     }
 
+    [data-testid="stSidebar"] hr {
+        border-color: var(--border-soft);
+    }
+
+    /* ---------- Hero banner ---------- */
     .hero {
-        padding: 26px 30px;
+        position: relative;
+        overflow: hidden;
+        padding: 32px 34px;
         border: 1px solid var(--border);
-        border-radius: 22px;
-        background: linear-gradient(135deg, rgba(230,57,70,.15), rgba(16,21,31,.92) 52%);
-        box-shadow: 0 18px 60px rgba(0,0,0,.25);
-        margin-bottom: 22px;
+        border-radius: var(--radius-lg);
+        background:
+            linear-gradient(135deg, rgba(239,64,86,.18), rgba(124,92,255,.10) 45%, rgba(16,21,31,.94) 80%);
+        box-shadow: var(--shadow-soft);
+        margin-bottom: 26px;
+    }
+
+    .hero::after {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -60px;
+        width: 220px;
+        height: 220px;
+        background: var(--accent-gradient);
+        filter: blur(90px);
+        opacity: .35;
+        border-radius: 50%;
+        pointer-events: none;
     }
 
     .hero h1 {
-        font-size: 38px;
-        margin: 0 0 7px 0;
+        font-family: 'Sora', 'Inter', sans-serif;
+        font-size: 40px;
+        margin: 0 0 8px 0;
         font-weight: 800;
-        letter-spacing: -1px;
+        letter-spacing: -1.2px;
+        background: linear-gradient(90deg, #ffffff 30%, #ffd7da 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 
     .hero p {
         color: var(--muted);
-        font-size: 15px;
+        font-size: 15.5px;
         margin: 0;
-        line-height: 1.6;
+        line-height: 1.65;
+        max-width: 640px;
     }
 
     .badge {
-        display: inline-block;
-        padding: 6px 11px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 13px;
         border-radius: 999px;
-        background: rgba(230,57,70,.14);
-        border: 1px solid rgba(230,57,70,.35);
-        color: #ff8a91;
-        font-size: 12px;
-        font-weight: 700;
-        margin-bottom: 13px;
+        background: rgba(239,64,86,.14);
+        border: 1px solid rgba(239,64,86,.35);
+        color: #ff9aa2;
+        font-size: 11.5px;
+        font-weight: 800;
+        letter-spacing: .4px;
+        margin-bottom: 15px;
     }
 
+    /* ---------- Section headers ---------- */
     .section-title {
-        font-size: 20px;
+        font-family: 'Sora', 'Inter', sans-serif;
+        font-size: 21px;
         font-weight: 750;
-        margin: 18px 0 10px 0;
+        margin: 20px 0 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-title::before {
+        content: "";
+        width: 5px;
+        height: 20px;
+        border-radius: 4px;
+        background: var(--accent-gradient);
+        display: inline-block;
     }
 
     .section-subtitle {
         color: var(--muted);
-        font-size: 13px;
-        margin-bottom: 14px;
+        font-size: 13.5px;
+        margin-bottom: 16px;
     }
 
+    /* ---------- Metric cards ---------- */
     .metric-card {
         background: linear-gradient(145deg, var(--surface-2), var(--surface));
         border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 18px;
+        border-radius: var(--radius-md);
+        padding: 20px;
         min-height: 108px;
+        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .metric-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(239,64,86,.4);
+        box-shadow: var(--shadow-glow);
     }
 
     .metric-label {
         color: var(--muted);
-        font-size: 12px;
-        font-weight: 600;
+        font-size: 11.5px;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: .6px;
+        letter-spacing: .8px;
     }
 
     .metric-value {
-        font-size: 28px;
+        font-family: 'Sora', 'Inter', sans-serif;
+        font-size: 29px;
         font-weight: 800;
-        margin-top: 7px;
+        margin-top: 8px;
     }
 
+    /* ---------- Candidate cards ---------- */
     .candidate-card {
-        background: linear-gradient(145deg, #111722, #0e131c);
+        background: linear-gradient(145deg, #121826, #0d1119);
         border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 18px;
-        margin: 8px 0;
+        border-radius: var(--radius-md);
+        padding: 20px;
+        margin: 9px 0;
+        transition: border-color .18s ease, transform .18s ease;
+    }
+
+    .candidate-card:hover {
+        border-color: rgba(124,92,255,.35);
+        transform: translateY(-2px);
     }
 
     .candidate-name {
-        font-size: 18px;
+        font-family: 'Sora', 'Inter', sans-serif;
+        font-size: 18.5px;
         font-weight: 750;
     }
 
     .small-muted {
-        color: var(--muted);
+        color: var(--muted-2);
         font-size: 12px;
     }
 
+    /* ---------- Pills / tags ---------- */
     .pill {
         display: inline-block;
-        padding: 4px 9px;
-        margin: 3px 4px 3px 0;
+        padding: 5px 11px;
+        margin: 3px 5px 3px 0;
         border-radius: 999px;
-        background: #1b2433;
-        color: #dce3ef;
-        font-size: 11px;
-        border: 1px solid #2a3548;
+        background: rgba(124,92,255,.10);
+        color: #e3e7ff;
+        font-size: 11.5px;
+        font-weight: 600;
+        border: 1px solid rgba(124,92,255,.28);
     }
 
+    /* ---------- Buttons ---------- */
     .stButton > button {
-        border-radius: 10px;
+        border-radius: 12px;
         font-weight: 700;
         border: 1px solid #303b50;
-        min-height: 42px;
+        min-height: 44px;
+        transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .stButton > button:hover {
+        transform: translateY(-1px);
+        border-color: rgba(239,64,86,.5);
     }
 
     .stButton > button[kind="primary"] {
-        background: linear-gradient(135deg, #e63946, #b91f2c);
+        background: var(--accent-gradient);
         border: none;
         color: white;
+        box-shadow: 0 12px 30px rgba(239,64,86,.30);
     }
 
+    .stButton > button[kind="primary"]:hover {
+        box-shadow: 0 14px 38px rgba(239,64,86,.42);
+    }
+
+    /* ---------- File uploader ---------- */
     div[data-testid="stFileUploader"] {
         background: rgba(16,21,31,.72);
-        border: 1px dashed #39465e;
-        border-radius: 14px;
-        padding: 8px;
+        border: 1.5px dashed #3c4a64;
+        border-radius: var(--radius-md);
+        padding: 10px;
+        transition: border-color .18s ease;
     }
 
+    div[data-testid="stFileUploader"]:hover {
+        border-color: rgba(239,64,86,.55);
+    }
+
+    /* ---------- Info box ---------- */
     .info-box {
-        padding: 13px 15px;
-        border-radius: 12px;
+        padding: 14px 16px;
+        border-radius: var(--radius-sm);
         background: #111823;
         border: 1px solid var(--border);
         color: #cbd4e2;
         font-size: 13px;
-        line-height: 1.55;
+        line-height: 1.6;
     }
 
+    /* ---------- Dataframes / tables ---------- */
+    [data-testid="stDataFrame"] {
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+
+    /* ---------- Progress bar ---------- */
+    div[data-testid="stProgress"] > div > div {
+        background: var(--accent-gradient) !important;
+    }
+
+    /* ---------- Radio (sidebar nav) styling ---------- */
+    [data-testid="stSidebar"] div[role="radiogroup"] label {
+        padding: 6px 4px;
+        border-radius: 8px;
+        transition: background .15s ease;
+    }
+
+    [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+        background: rgba(255,255,255,.04);
+    }
+
+    /* ---------- Footer ---------- */
     .footer {
         text-align: center;
-        color: #657187;
+        color: #5b6478;
         font-size: 11px;
-        padding: 28px 0 10px;
+        padding: 30px 0 12px;
+        letter-spacing: .3px;
     }
 
     #MainMenu {visibility: hidden;}
