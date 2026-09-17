@@ -27,317 +27,196 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Professional dark theme
-# (UI ONLY UPGRADED — koi bhi logic/function neeche nahi chheda gaya)
+# Professional Maroon & Grey theme
 # -----------------------------
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-    /* ---------- Design tokens (naye, zyada premium palette) ---------- */
     :root {
-        --bg: #05070d;
-        --bg-2: #070a12;
-        --surface: #10151f;
-        --surface-2: #151b27;
-        --surface-glass: rgba(21, 27, 39, 0.55);
-        --border: #232d40;
-        --border-soft: rgba(255,255,255,0.06);
-        --text: #f5f7fb;
-        --muted: #9aa6b8;
-        --muted-2: #6f7c92;
-
-        /* accent gradient: red -> violet, zyada "premium/attractive" feel */
-        --accent: #ef4056;
-        --accent-2: #ff6b6b;
-        --accent-3: #7c5cff;
-        --accent-gradient: linear-gradient(135deg, #ff6b6b 0%, #ef4056 45%, #7c5cff 100%);
-
+        --bg: #1b1a1c;
+        --surface: #232224;
+        --surface-2: #2a2829;
+        --border: #3d3a3c;
+        --text: #f5f3f4;
+        --muted: #b8b3b6;
+        --accent: #7c1f2b;
+        --accent-2: #a83246;
         --success: #38d39f;
         --warning: #f5b942;
-        --danger: #ff5d6c;
-
-        --radius-lg: 22px;
-        --radius-md: 16px;
-        --radius-sm: 10px;
-
-        --shadow-soft: 0 18px 60px rgba(0,0,0,.35);
-        --shadow-glow: 0 0 0 1px rgba(239,64,86,.15), 0 20px 45px rgba(239,64,86,.10);
     }
 
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
     }
 
-    /* ---------- App background: subtle animated gradient glow ---------- */
     .stApp {
         background:
-            radial-gradient(circle at 8% -5%, rgba(239,64,86,.16), transparent 30%),
-            radial-gradient(circle at 95% 10%, rgba(124,92,255,.12), transparent 30%),
-            radial-gradient(circle at 50% 100%, rgba(56,211,159,.05), transparent 35%),
-            linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+            radial-gradient(circle at 10% 0%, rgba(124,31,43,.18), transparent 28%),
+            radial-gradient(circle at 90% 15%, rgba(168,50,70,.10), transparent 25%),
+            var(--bg);
         color: var(--text);
     }
 
-    /* ---------- Sidebar ---------- */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0b0e16 0%, #090b12 100%);
-        border-right: 1px solid var(--border-soft);
+        background: #201f21;
+        border-right: 1px solid var(--border);
     }
 
     [data-testid="stSidebar"] * {
         color: var(--text);
     }
 
-    [data-testid="stSidebar"] hr {
-        border-color: var(--border-soft);
-    }
-
-    /* ---------- Hero banner ---------- */
     .hero {
-        position: relative;
-        overflow: hidden;
-        padding: 32px 34px;
+        padding: 26px 30px;
         border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        background:
-            linear-gradient(135deg, rgba(239,64,86,.18), rgba(124,92,255,.10) 45%, rgba(16,21,31,.94) 80%);
-        box-shadow: var(--shadow-soft);
-        margin-bottom: 26px;
-    }
-
-    .hero::after {
-        content: "";
-        position: absolute;
-        top: -60px;
-        right: -60px;
-        width: 220px;
-        height: 220px;
-        background: var(--accent-gradient);
-        filter: blur(90px);
-        opacity: .35;
-        border-radius: 50%;
-        pointer-events: none;
+        border-radius: 22px;
+        background: linear-gradient(135deg, rgba(124,31,43,.22), rgba(35,34,36,.92) 52%);
+        box-shadow: 0 18px 60px rgba(0,0,0,.25);
+        margin-bottom: 22px;
     }
 
     .hero h1 {
-        font-family: 'Sora', 'Inter', sans-serif;
-        font-size: 40px;
-        margin: 0 0 8px 0;
+        font-size: 38px;
+        margin: 0 0 7px 0;
         font-weight: 800;
-        letter-spacing: -1.2px;
-        background: linear-gradient(90deg, #ffffff 30%, #ffd7da 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
+        color: var(--text);
     }
 
     .hero p {
         color: var(--muted);
-        font-size: 15.5px;
+        font-size: 15px;
         margin: 0;
-        line-height: 1.65;
-        max-width: 640px;
+        line-height: 1.6;
     }
 
     .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 7px 13px;
-        border-radius: 999px;
-        background: rgba(239,64,86,.14);
-        border: 1px solid rgba(239,64,86,.35);
-        color: #ff9aa2;
-        font-size: 11.5px;
-        font-weight: 800;
-        letter-spacing: .4px;
-        margin-bottom: 15px;
-    }
-
-    /* ---------- Section headers ---------- */
-    .section-title {
-        font-family: 'Sora', 'Inter', sans-serif;
-        font-size: 21px;
-        font-weight: 750;
-        margin: 20px 0 8px 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .section-title::before {
-        content: "";
-        width: 5px;
-        height: 20px;
-        border-radius: 4px;
-        background: var(--accent-gradient);
         display: inline-block;
+        padding: 6px 11px;
+        border-radius: 999px;
+        background: rgba(124,31,43,.22);
+        border: 1px solid rgba(168,50,70,.45);
+        color: #ff9aa8;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 13px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: 750;
+        margin: 18px 0 10px 0;
+        color: var(--text);
     }
 
     .section-subtitle {
         color: var(--muted);
-        font-size: 13.5px;
-        margin-bottom: 16px;
+        font-size: 13px;
+        margin-bottom: 14px;
     }
 
-    /* ---------- Metric cards ---------- */
     .metric-card {
         background: linear-gradient(145deg, var(--surface-2), var(--surface));
         border: 1px solid var(--border);
-        border-radius: var(--radius-md);
-        padding: 20px;
+        border-radius: 16px;
+        padding: 18px;
         min-height: 108px;
-        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-
-    .metric-card:hover {
-        transform: translateY(-3px);
-        border-color: rgba(239,64,86,.4);
-        box-shadow: var(--shadow-glow);
     }
 
     .metric-label {
         color: var(--muted);
-        font-size: 11.5px;
-        font-weight: 700;
+        font-size: 12px;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: .8px;
+        letter-spacing: .6px;
     }
 
     .metric-value {
-        font-family: 'Sora', 'Inter', sans-serif;
-        font-size: 29px;
+        font-size: 28px;
         font-weight: 800;
-        margin-top: 8px;
+        margin-top: 7px;
+        color: var(--text);
     }
 
-    /* ---------- Candidate cards ---------- */
     .candidate-card {
-        background: linear-gradient(145deg, #121826, #0d1119);
+        background: linear-gradient(145deg, #262425, #201e1f);
         border: 1px solid var(--border);
-        border-radius: var(--radius-md);
-        padding: 20px;
-        margin: 9px 0;
-        transition: border-color .18s ease, transform .18s ease;
-    }
-
-    .candidate-card:hover {
-        border-color: rgba(124,92,255,.35);
-        transform: translateY(-2px);
+        border-radius: 16px;
+        padding: 18px;
+        margin: 8px 0;
     }
 
     .candidate-name {
-        font-family: 'Sora', 'Inter', sans-serif;
-        font-size: 18.5px;
+        font-size: 18px;
         font-weight: 750;
+        color: var(--text);
     }
 
     .small-muted {
-        color: var(--muted-2);
+        color: var(--muted);
         font-size: 12px;
     }
 
-    /* ---------- Pills / tags ---------- */
     .pill {
         display: inline-block;
-        padding: 5px 11px;
-        margin: 3px 5px 3px 0;
+        padding: 4px 9px;
+        margin: 3px 4px 3px 0;
         border-radius: 999px;
-        background: rgba(124,92,255,.10);
-        color: #e3e7ff;
-        font-size: 11.5px;
-        font-weight: 600;
-        border: 1px solid rgba(124,92,255,.28);
+        background: #332e30;
+        color: #f0e9eb;
+        font-size: 11px;
+        border: 1px solid #4a4345;
     }
 
-    /* ---------- Buttons ---------- */
     .stButton > button {
-        border-radius: 12px;
+        border-radius: 10px;
         font-weight: 700;
-        border: 1px solid #303b50;
-        min-height: 44px;
-        transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-
-    .stButton > button:hover {
-        transform: translateY(-1px);
-        border-color: rgba(239,64,86,.5);
+        border: 1px solid #4a4547;
+        min-height: 42px;
+        color: var(--text) !important;
+        background: var(--surface-2);
     }
 
     .stButton > button[kind="primary"] {
-        background: var(--accent-gradient);
+        background: linear-gradient(135deg, var(--accent-2), var(--accent));
         border: none;
-        color: white;
-        box-shadow: 0 12px 30px rgba(239,64,86,.30);
+        color: #ffffff !important;
     }
 
-    .stButton > button[kind="primary"]:hover {
-        box-shadow: 0 14px 38px rgba(239,64,86,.42);
-    }
-
-    /* ---------- File uploader ---------- */
     div[data-testid="stFileUploader"] {
-        background: rgba(16,21,31,.72);
-        border: 1.5px dashed #3c4a64;
-        border-radius: var(--radius-md);
-        padding: 10px;
-        transition: border-color .18s ease;
+        background: rgba(35,34,36,.72);
+        border: 1px dashed #55494c;
+        border-radius: 14px;
+        padding: 8px;
     }
 
-    div[data-testid="stFileUploader"]:hover {
-        border-color: rgba(239,64,86,.55);
+    div[data-testid="stFileUploader"] * {
+        color: var(--text) !important;
     }
 
-    /* ---------- Info box ---------- */
     .info-box {
-        padding: 14px 16px;
-        border-radius: var(--radius-sm);
-        background: #111823;
+        padding: 13px 15px;
+        border-radius: 12px;
+        background: #262425;
         border: 1px solid var(--border);
-        color: #cbd4e2;
+        color: #ece6e8;
         font-size: 13px;
-        line-height: 1.6;
+        line-height: 1.55;
     }
 
-    /* ---------- Dataframes / tables ---------- */
-    [data-testid="stDataFrame"] {
-        border-radius: var(--radius-sm);
-        overflow: hidden;
-        border: 1px solid var(--border);
-    }
-
-    /* ---------- Progress bar ---------- */
-    div[data-testid="stProgress"] > div > div {
-        background: var(--accent-gradient) !important;
-    }
-
-    /* ---------- Radio (sidebar nav) styling ---------- */
-    [data-testid="stSidebar"] div[role="radiogroup"] label {
-        padding: 6px 4px;
-        border-radius: 8px;
-        transition: background .15s ease;
-    }
-
-    [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
-        background: rgba(255,255,255,.04);
-    }
-
-    /* ---------- Footer ---------- */
     .footer {
         text-align: center;
-        color: #5b6478;
+        color: #9a9296;
         font-size: 11px;
-        padding: 30px 0 12px;
-        letter-spacing: .3px;
+        padding: 28px 0 10px;
     }
 
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
 
-    /* ---------- FIX 1: hide only the top toolbar, keep sidebar toggle ---------- */
+    /* ---------- Keep only the top toolbar hidden; sidebar toggle stays visible ---------- */
     header [data-testid="stToolbar"] {visibility: hidden;}
 
     [data-testid="collapsedControl"] {
@@ -349,39 +228,70 @@ st.markdown(
         border: 1px solid var(--border);
         border-radius: 8px;
         color: var(--text) !important;
-        box-shadow: var(--shadow-soft);
+        box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
 
     [data-testid="collapsedControl"] svg {
         fill: var(--text) !important;
     }
 
-    /* ---------- FIX 2: make text area / text input readable on dark theme ---------- */
+    /* ---------- Text area / text input / select box: readable on dark theme ---------- */
     .stTextArea textarea,
     .stTextInput input {
         background-color: var(--surface) !important;
         color: var(--text) !important;
         border: 1px solid var(--border) !important;
-        border-radius: var(--radius-sm) !important;
-        caret-color: var(--accent);
+        border-radius: 10px !important;
+        caret-color: var(--accent-2);
     }
 
     .stTextArea textarea::placeholder,
     .stTextInput input::placeholder {
-        color: var(--muted-2) !important;
+        color: var(--muted) !important;
         opacity: 1 !important;
     }
 
     .stTextArea textarea:focus,
     .stTextInput input:focus {
-        border-color: var(--accent) !important;
-        box-shadow: 0 0 0 2px rgba(239,64,86,.18) !important;
+        border-color: var(--accent-2) !important;
+        box-shadow: 0 0 0 2px rgba(168,50,70,.25) !important;
     }
 
     .stSelectbox div[data-baseweb="select"] > div {
         background-color: var(--surface) !important;
         color: var(--text) !important;
         border-color: var(--border) !important;
+    }
+
+    .stSelectbox div[data-baseweb="select"] * {
+        color: var(--text) !important;
+    }
+
+    /* ---------- Radio buttons (sidebar nav) ---------- */
+    [data-testid="stSidebar"] div[role="radiogroup"] label {
+        padding: 6px 4px;
+        border-radius: 8px;
+    }
+
+    [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+        background: rgba(255,255,255,.05);
+    }
+
+    /* ---------- Dataframes / tables text ---------- */
+    [data-testid="stDataFrame"] {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+    }
+
+    /* ---------- Progress bar ---------- */
+    div[data-testid="stProgress"] > div > div {
+        background: linear-gradient(135deg, var(--accent-2), var(--accent)) !important;
+    }
+
+    /* ---------- Generic body text fallback (headings, markdown, labels) ---------- */
+    .stMarkdown, .stText, label, p, span, div {
+        color: var(--text);
     }
     </style>
     """,
@@ -732,7 +642,7 @@ with st.sidebar:
         """
         <div style="padding:8px 2px 18px;">
             <div style="font-size:25px;font-weight:800;">💼 HireFlow AI</div>
-            <div style="color:#9aa6b8;font-size:12px;margin-top:5px;">
+            <div style="color:#b8b3b6;font-size:12px;margin-top:5px;">
                 Recruitment Intelligence
             </div>
         </div>
@@ -1145,7 +1055,7 @@ else:
             f"""
             <div class="candidate-card">
                 <div style="display:flex;gap:16px;align-items:flex-start;">
-                    <div style="font-size:13px;font-weight:800;color:#ff7d85;">{num}</div>
+                    <div style="font-size:13px;font-weight:800;color:#ff9aa8;">{num}</div>
                     <div>
                         <div class="candidate-name">{title}</div>
                         <div class="small-muted" style="margin-top:5px;">{description}</div>
