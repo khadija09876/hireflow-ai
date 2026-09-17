@@ -336,7 +336,53 @@ st.markdown(
 
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
+
+    /* ---------- FIX 1: hide only the top toolbar, keep sidebar toggle ---------- */
+    header [data-testid="stToolbar"] {visibility: hidden;}
+
+    [data-testid="collapsedControl"] {
+        visibility: visible !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text) !important;
+        box-shadow: var(--shadow-soft);
+    }
+
+    [data-testid="collapsedControl"] svg {
+        fill: var(--text) !important;
+    }
+
+    /* ---------- FIX 2: make text area / text input readable on dark theme ---------- */
+    .stTextArea textarea,
+    .stTextInput input {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: var(--radius-sm) !important;
+        caret-color: var(--accent);
+    }
+
+    .stTextArea textarea::placeholder,
+    .stTextInput input::placeholder {
+        color: var(--muted-2) !important;
+        opacity: 1 !important;
+    }
+
+    .stTextArea textarea:focus,
+    .stTextInput input:focus {
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 2px rgba(239,64,86,.18) !important;
+    }
+
+    .stSelectbox div[data-baseweb="select"] > div {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+        border-color: var(--border) !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
