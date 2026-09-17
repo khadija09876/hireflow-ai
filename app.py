@@ -2,7 +2,6 @@ import os
 import io
 import re
 import json
-import hashlib
 from typing import List, Dict, Any
 
 import streamlit as st
@@ -26,7 +25,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Professional Dark Theme & Styling
+# Professional Dark Theme & Styling (Keeping Streamlit UI intact)
 # -----------------------------
 st.markdown(
     """
@@ -201,10 +200,6 @@ st.markdown(
         font-size: 11px;
         padding: 28px 0 10px;
     }
-
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
     </style>
     """,
     unsafe_allow_html=True,
@@ -221,7 +216,7 @@ DEFAULT_STATE = {
     "results": [],
     "analysis_ready": False,
     "analysis_id": None,
-    "hr_feedback": {},  # Stores ratings and private notes per candidate file
+    "hr_feedback": {},
 }
 
 for key, value in DEFAULT_STATE.items():
@@ -467,22 +462,6 @@ CANDIDATE RESUME CONTEXT:
     return data
 
 
-def make_summary(results: List[Dict[str, Any]]) -> Dict[str, Any]:
-    if not results:
-        return {"candidate_count": 0, "skills_count": 0, "education_count": 0, "matched_count": 0, "missing_count": 0}
-    skills = sum(len(safe_list(r.get("skills"))) for r in results)
-    education = sum(len(safe_list(r.get("education"))) for r in results)
-    matched = sum(len(safe_list(r.get("matched_requirements"))) for r in results)
-    missing = sum(len(safe_list(r.get("missing_or_unverified_requirements"))) for r in results)
-    return {
-        "candidate_count": len(results),
-        "skills_count": skills,
-        "education_count": education,
-        "matched_count": matched,
-        "missing_count": missing,
-    }
-
-
 def pills(items: List[str], empty_text: str = "Not found in provided material"):
     items = [str(x) for x in safe_list(items) if str(x).strip()]
     if not items:
@@ -704,7 +683,6 @@ elif page == "Candidate Evaluation & Notes":
             fname = result.get("_filename", "")
             profile = result.get("candidate_profile", {})
 
-            # Initialize state slot for candidate feedback
             if fname not in st.session_state.hr_feedback:
                 st.session_state.hr_feedback[fname] = {"rating": "Select Rating", "notes": ""}
 
@@ -718,7 +696,6 @@ elif page == "Candidate Evaluation & Notes":
                 unsafe_allow_html=True,
             )
 
-            # Interactive HR Feedback Section
             with st.form(key=f"hr_form_{fname}"):
                 st.markdown("#### 📝 Confidential HR Evaluation & Feedback")
                 col_r1, col_r2 = st.columns(2)
