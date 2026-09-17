@@ -289,9 +289,54 @@ st.markdown(
         background: linear-gradient(135deg, var(--accent-2), var(--accent)) !important;
     }
 
-    /* ---------- Generic body text fallback (headings, markdown, labels) ---------- */
-    .stMarkdown, .stText, label, p, span, div {
+    /* ---------- Body text: only apply to plain markdown/labels, NEVER to
+       success/warning/info/error alert boxes (they need their own contrast) ---------- */
+    .stMarkdown p, .stMarkdown li, .stMarkdown span,
+    [data-testid="stWidgetLabel"] label,
+    [data-testid="stMetricLabel"], [data-testid="stMetricValue"] {
         color: var(--text);
+    }
+
+    /* ---------- Sidebar radio (Workspace) options: make label + selected dot clearly visible ---------- */
+    [data-testid="stRadio"] label {
+        color: var(--text) !important;
+    }
+
+    [data-testid="stRadio"] label p {
+        color: var(--text) !important;
+        font-size: 14px;
+    }
+
+    /* ---------- Dropdown / selectbox popover (candidate picker) ----------
+       This menu renders in a portal outside the main app container, so it
+       needs its own background + text color or it becomes invisible. */
+    div[data-baseweb="popover"] {
+        background-color: var(--surface) !important;
+    }
+
+    ul[data-testid="stSelectboxVirtualDropdown"] {
+        background-color: var(--surface) !important;
+        border: 1px solid var(--border) !important;
+    }
+
+    ul[data-testid="stSelectboxVirtualDropdown"] li {
+        background-color: var(--surface) !important;
+        color: var(--text) !important;
+    }
+
+    ul[data-testid="stSelectboxVirtualDropdown"] li:hover {
+        background-color: var(--surface-2) !important;
+    }
+
+    /* ---------- Alert boxes (success / warning / info / error): keep Streamlit's
+       own light backgrounds with dark, readable text — do not override with
+       the dark-theme text color. ---------- */
+    div[data-testid="stAlert"] {
+        color: #1a1a1a !important;
+    }
+
+    div[data-testid="stAlert"] p, div[data-testid="stAlert"] span {
+        color: #1a1a1a !important;
     }
     </style>
     """,
