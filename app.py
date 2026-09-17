@@ -206,17 +206,8 @@ st.markdown(
         line-height: 1.55;
     }
 
-    .footer {
-        text-align: center;
-        color: #9a9296;
-        font-size: 11px;
-        padding: 28px 0 10px;
-    }
-
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-
-    /* ---------- Keep only the top toolbar hidden; sidebar toggle stays visible ---------- */
     header [data-testid="stToolbar"] {visibility: hidden;}
 
     [data-testid="collapsedControl"] {
@@ -235,7 +226,6 @@ st.markdown(
         fill: var(--text) !important;
     }
 
-    /* ---------- Text area / text input / select box: readable on dark theme ---------- */
     .stTextArea textarea,
     .stTextInput input {
         background-color: var(--surface) !important;
@@ -267,7 +257,6 @@ st.markdown(
         color: var(--text) !important;
     }
 
-    /* ---------- Radio buttons (sidebar nav) ---------- */
     [data-testid="stSidebar"] div[role="radiogroup"] label {
         padding: 6px 4px;
         border-radius: 8px;
@@ -277,27 +266,22 @@ st.markdown(
         background: rgba(255,255,255,.05);
     }
 
-    /* ---------- Dataframes / tables text ---------- */
     [data-testid="stDataFrame"] {
         border-radius: 10px;
         overflow: hidden;
         border: 1px solid var(--border);
     }
 
-    /* ---------- Progress bar ---------- */
     div[data-testid="stProgress"] > div > div {
         background: linear-gradient(135deg, var(--accent-2), var(--accent)) !important;
     }
 
-    /* ---------- Body text: only apply to plain markdown/labels, NEVER to
-       success/warning/info/error alert boxes (they need their own contrast) ---------- */
     .stMarkdown p, .stMarkdown li, .stMarkdown span,
     [data-testid="stWidgetLabel"] label,
     [data-testid="stMetricLabel"], [data-testid="stMetricValue"] {
         color: var(--text);
     }
 
-    /* ---------- Sidebar radio (Workspace) options: make label + selected dot clearly visible ---------- */
     [data-testid="stRadio"] label {
         color: var(--text) !important;
     }
@@ -307,9 +291,6 @@ st.markdown(
         font-size: 14px;
     }
 
-    /* ---------- Dropdown / selectbox popover (candidate picker) ----------
-       This menu renders in a portal outside the main app container, so it
-       needs its own background + text color or it becomes invisible. */
     div[data-baseweb="popover"] {
         background-color: var(--surface) !important;
     }
@@ -328,9 +309,6 @@ st.markdown(
         background-color: var(--surface-2) !important;
     }
 
-    /* ---------- Alert boxes (success / warning / info / error): keep Streamlit's
-       own light backgrounds with dark, readable text — do not override with
-       the dark-theme text color. ---------- */
     div[data-testid="stAlert"] {
         color: #1a1a1a !important;
     }
@@ -559,7 +537,6 @@ def candidate_name_from_result(result: Dict[str, Any], fallback: str) -> str:
 
 
 def analyze_candidate(job_text: str, resume_text: str, candidate_filename: str) -> Dict[str, Any]:
-    # Retrieve JD context relevant to this resume.
     jd_chunks = split_chunks(job_text)
     jd_index = build_faiss_index(jd_chunks)
     jd_context = retrieve_context(
@@ -569,7 +546,6 @@ def analyze_candidate(job_text: str, resume_text: str, candidate_filename: str) 
         top_k=6,
     )
 
-    # Retrieve resume context around core candidate information.
     resume_chunks = split_chunks(resume_text)
     resume_index = build_faiss_index(resume_chunks)
     resume_context = retrieve_context(
@@ -625,7 +601,6 @@ Generate 4 to 6 useful questions.
     data = parse_json_response(raw)
 
     if not data:
-        # Graceful plain-text fallback if the model returns malformed JSON.
         return {
             "candidate_profile": {"name": "", "email": "", "phone": "", "location": ""},
             "skills": [],
@@ -815,7 +790,6 @@ if page == "Screening Dashboard":
                 + ". For scanned PDFs, add an OCR-enabled version or OCR layer."
             )
 
-    # Metrics
     candidate_count = len(st.session_state.candidates)
     jd_loaded = bool(st.session_state.job_text.strip())
 
@@ -1044,103 +1018,35 @@ elif page == "Candidate Analysis":
             for item in safe_list(result.get("experience")):
                 st.write(f"• {item}")
 
-            st.markdown("#### Certifications")
-            for item in safe_list(result.get("certifications")):
-                st.write(f"• {item}")
-
         with right:
-            st.markdown("#### Matched requirements")
+            st.markdown("#### Matched Requirements")
             for item in safe_list(result.get("matched_requirements")):
-                st.success(str(item))
+                st.write(f"✓ {item}")
 
-            st.markdown("#### Missing / unverified")
+            st.markdown("#### Missing / Unverified")
             for item in safe_list(result.get("missing_or_unverified_requirements")):
-                st.warning(str(item))
+                st.write(f"⚠ {item}")
 
-            st.markdown("#### Evidence notes")
-            for item in safe_list(result.get("evidence_notes")):
-                st.write(f"• {item}")
-
-        st.markdown("#### Relevant experience summary")
-        st.markdown(
-            f"<div class='info-box'>{result.get('relevant_experience_summary', 'Not found in provided material')}</div>",
-            unsafe_allow_html=True,
-        )
-
-        st.markdown("#### Suggested interview questions")
-        questions = safe_list(result.get("interview_questions"))
-        if questions:
-            for i, q in enumerate(questions, 1):
-                st.markdown(f"**{i}.** {q}")
-        else:
-            st.info("No interview questions were generated.")
+            st.markdown("#### Interview Questions")
+            for item in safe_list(result.get("interview_questions")):
+                st.write(f"❓ {item}")
 
 
 # ============================================================
 # How It Works
 # ============================================================
-else:
-    st.markdown("<div class='section-title'>How HireFlow AI works</div>", unsafe_allow_html=True)
-    st.markdown(
-        "<div class='section-subtitle'>The technical workflow runs behind the interface so HR can focus on the results.</div>",
-        unsafe_allow_html=True,
-    )
-
-    steps = [
-        ("01", "Upload", "Add a job description and multiple candidate resumes."),
-        ("02", "Extract", "Python extracts text from PDF, DOCX and TXT documents."),
-        ("03", "Retrieve", "The system chunks documents, creates embeddings and retrieves relevant context."),
-        ("04", "Analyze", "Groq AI compares documented candidate information with job requirements."),
-        ("05", "Review", "HR reviews skills, education, experience, matching evidence and missing/unverified requirements."),
-        ("06", "Prepare", "The system generates job-relevant interview questions from the supplied context."),
-    ]
-
-    for num, title, description in steps:
-        st.markdown(
-            f"""
-            <div class="candidate-card">
-                <div style="display:flex;gap:16px;align-items:flex-start;">
-                    <div style="font-size:13px;font-weight:800;color:#ff9aa8;">{num}</div>
-                    <div>
-                        <div class="candidate-name">{title}</div>
-                        <div class="small-muted" style="margin-top:5px;">{description}</div>
-                    </div>
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    st.markdown("### Technology")
-    tech_df = pd.DataFrame(
-        [
-            ["Python", "Application logic and document processing"],
-            ["Streamlit", "Web interface and HR dashboard"],
-            ["Groq", "Fast LLM-based candidate analysis"],
-            ["RAG", "Context retrieval from job descriptions and resumes"],
-            ["FAISS", "Vector similarity search"],
-            ["Sentence Transformers", "Document embeddings"],
-            ["PyMuPDF", "PDF text extraction"],
-            ["python-docx", "DOCX text extraction"],
-        ],
-        columns=["Technology", "Role"],
-    )
-    st.dataframe(tech_df, use_container_width=True, hide_index=True)
-
+elif page == "How It Works":
+    st.markdown("<div class='section-title'>How HireFlow AI Works</div>", unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="info-box">
-        <b>Responsible use:</b> HireFlow AI is designed as a recruitment
-        support tool. It should not infer protected characteristics or make
-        the final hiring decision. HR professionals should verify important
-        information against the original application materials.
+        <div class="info-box" style="line-height: 1.8;">
+        <b>1. Ingestion & Extraction:</b> Extracts text cleanly from PDF, DOCX, and TXT resume files.<br>
+        <b>2. Semantic Chunking & FAISS:</b> Splits documents and uses vector embeddings to index and find exact context matches.<br>
+        <b>3. Groq API Integration:</b> Performs structured evaluation using secure LLM processing.<br>
+        <b>4. HR Guardrails:</b> Ensures outputs focus exclusively on documented facts and requirements, leaving final human oversight intact.
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-
-st.markdown(
-    "<div class='footer'>HireFlow AI · Intelligent Recruitment Assistant · AI-assisted, human-led hiring</div>",
-    unsafe_allow_html=True,
-)
+st.markdown("<div class='footer'>HireFlow AI &bull; Intelligent Recruitment Assistant</div>", unsafe_allow_html=True)
