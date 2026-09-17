@@ -18,7 +18,7 @@ import faiss
 # ============================================================
 
 st.set_page_config(
-    page_title="HireFlow AI | Professional Recruitment Suite",
+    page_title="HireFlow AI | Professional Recruitment ",
     page_icon="💼",
     layout="wide",
     initial_sidebar_state="expanded",
